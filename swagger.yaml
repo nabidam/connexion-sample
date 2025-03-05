@@ -1,0 +1,728 @@
+openapi: 3.0.1
+info:
+  title: DynamicCommands API
+  version: v1
+servers:
+- url: /
+paths:
+  /api/commands/{id}:
+    get:
+      tags:
+      - Command
+      operationId: get_command_with_id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Command'
+                x-content-type: application/json
+  
+  /api/commands:
+    get:
+      tags:
+      - Command
+      operationId: get_all_commands
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Command'
+                x-content-type: application/json
+  
+    put:
+      tags:
+      - Command
+      operationId: update_command
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Command'
+        required: true
+      responses:
+        "200":
+          description: OK
+  
+    post:
+      tags:
+      - Command
+      operationId: insert_command
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Command'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Command'
+  
+    delete:
+      tags:
+      - Command
+      operationId: delete_command
+      parameters:
+      - name: id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+  
+  /api/commands/moduleId:
+    get:
+      tags:
+      - Command
+      operationId: get_command_with_module_id
+      parameters:
+      - name: moduleId
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Command'
+                x-content-type: application/json
+  
+  /api/modules/{id}:
+    get:
+      tags:
+      - Module
+      operationId: get_module_with_id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+  
+  /api/modules:
+    get:
+      tags:
+      - Module
+      operationId: get_all_modules
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Module'
+                x-content-type: application/json
+  
+    put:
+      tags:
+      - Module
+      operationId: update_module
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Module'
+        required: true
+      responses:
+        "200":
+          description: OK
+  
+    post:
+      tags:
+      - Module
+      operationId: insert_module
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Module'
+        required: true
+      responses:
+        "200":
+          description: OK
+  
+    delete:
+      tags:
+      - Module
+      operationId: delete_module
+      parameters:
+      - name: id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+  
+  /api/modules/subSystemId:
+    get:
+      tags:
+      - Module
+      operationId: get_module_with_sub_system_id
+      parameters:
+      - name: subSystemId
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Module'
+                x-content-type: application/json
+  
+  /api/parameters/{id}:
+    get:
+      tags:
+      - Parameter
+      operationId: get_parameter_with_id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Parameter'
+                x-content-type: application/json
+  
+  /api/parameters:
+    get:
+      tags:
+      - Parameter
+      operationId: get_all_parameters
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Parameter'
+                x-content-type: application/json
+  
+  /api/parameters/commandId:
+    get:
+      tags:
+      - Parameter
+      operationId: get_parameter_with_command_id
+      parameters:
+      - name: commandId
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Parameter'
+                x-content-type: application/json
+  
+  /api/parametertypes:
+    get:
+      tags:
+      - ParameterType
+      operationId: get_all_parameter_types
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ParameterType'
+                x-content-type: application/json
+  
+  /api/satellites/{id}:
+    get:
+      tags:
+      - Satellite
+      operationId: get_satellite_with_id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Satellite'
+  
+  /api/satellites:
+    get:
+      tags:
+      - Satellite
+      operationId: get_all_satellites
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Satellite'
+                x-content-type: application/json
+  
+    put:
+      tags:
+      - Satellite
+      operationId: update_satellite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Satellite'
+        required: true
+      responses:
+        "200":
+          description: OK
+  
+    post:
+      tags:
+      - Satellite
+      operationId: insert_satellite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Satellite'
+        required: true
+      responses:
+        "200":
+          description: OK
+  
+    delete:
+      tags:
+      - Satellite
+      operationId: delete_satellite
+      parameters:
+      - name: id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+  
+  /api/subsystems/{id}:
+    get:
+      tags:
+      - Subsystem
+      operationId: get_subsystem_with_id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subsystem'
+  
+  /api/subsystems:
+    get:
+      tags:
+      - Subsystem
+      operationId: get_all_subsystems
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subsystem'
+                x-content-type: application/json
+  
+    put:
+      tags:
+      - Subsystem
+      operationId: update_subsystem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subsystem'
+        required: true
+      responses:
+        "200":
+          description: OK
+  
+    post:
+      tags:
+      - Subsystem
+      operationId: insert_sub_system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subsystem'
+        required: true
+      responses:
+        "200":
+          description: OK
+  
+    delete:
+      tags:
+      - Subsystem
+      operationId: delete_subsystem
+      parameters:
+      - name: id
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+  
+  /api/subsystems/satelliteId:
+    get:
+      tags:
+      - Subsystem
+      operationId: get_subsystem_with_satellite_id
+      parameters:
+      - name: satelliteId
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subsystem'
+                x-content-type: application/json
+  
+  /api/valuetypes:
+    get:
+      tags:
+      - ValueType
+      operationId: get_all_value_types
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ValueType'
+                x-content-type: application/json
+  
+components:
+  schemas:
+    Command:
+      type: object
+      properties:
+        idCommand:
+          type: integer
+          format: int32
+        commandName:
+          type: string
+          nullable: true
+        obcid:
+          type: string
+          nullable: true
+        lenght:
+          type: integer
+          format: int32
+        isEnabled:
+          type: boolean
+        moduleId:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+      example:
+        lenght: 6
+        obcid: obcid
+        commandName: commandName
+        idCommand: 0
+        isEnabled: true
+        moduleId: 1
+    Module:
+      type: object
+      properties:
+        idModule:
+          type: integer
+          format: int32
+        moduleName:
+          type: string
+          nullable: true
+        obcid:
+          type: string
+          nullable: true
+        subsystemId:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+      example:
+        obcid: obcid
+        subsystemId: 6
+        moduleName: moduleName
+        idModule: 0
+    ParameterType:
+      type: object
+      properties:
+        idParameterType:
+          type: integer
+          format: int32
+        type:
+          type: string
+      example:
+        idParameterType: 0
+        type: type
+    Parameter:
+      type: object
+      properties:
+        idParameters:
+          type: integer
+          format: int32
+        parameterNumber:
+          type: integer
+          format: int32
+        labelName:
+          type: string
+          nullable: true
+        defaultValue:
+          type: string
+          nullable: true
+        formula:
+          type: string
+          nullable: true
+        minValue:
+          type: number
+          format: double
+          nullable: true
+        maxValue:
+          type: number
+          format: double
+          nullable: true
+        commandId:
+          type: integer
+          format: int32
+          nullable: true
+        parameterTypeId:
+          type: integer
+          format: int32
+          nullable: true
+        valueTypeId:
+          type: integer
+          format: int32
+          nullable: true
+        values:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Values'
+      additionalProperties: false
+      example:
+        parameterTypeId: 2
+        minValue: 1.4658129805029452
+        parameterNumber: 6
+        defaultValue: defaultValue
+        maxValue: 5.962133916683182
+        valueTypeId: 7
+        values:
+        - idValue: 9
+          parameterVisible: parameterVisible
+          text: text
+          parametersId: 3
+          value: value
+        - idValue: 9
+          parameterVisible: parameterVisible
+          text: text
+          parametersId: 3
+          value: value
+        idParameters: 0
+        formula: formula
+        labelName: labelName
+        commandId: 5
+    Satellite:
+      type: object
+      properties:
+        idSatellite:
+          type: integer
+          format: int32
+        satelliteName:
+          type: string
+          nullable: true
+        obcid:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        idSatellite: 0
+        obcid: obcid
+        satelliteName: satelliteName
+    Subsystem:
+      type: object
+      properties:
+        idSubsystem:
+          type: integer
+          format: int32
+        subsystemName:
+          type: string
+          nullable: true
+        obcid:
+          type: string
+          nullable: true
+        satelliteId:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+      example:
+        obcid: obcid
+        idSubsystem: 0
+        satelliteId: 6
+        subsystemName: subsystemName
+    ValueType:
+      type: object
+      properties:
+        idValueType:
+          type: integer
+          format: int32
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        idValueType: 0
+        value: value
+    Values:
+      type: object
+      properties:
+        idValue:
+          type: integer
+          format: int32
+        text:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+        parameterVisible:
+          type: string
+          nullable: true
+        parametersId:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+      example:
+        idValue: 9
+        parameterVisible: parameterVisible
+        text: text
+        parametersId: 3
+        value: value
+

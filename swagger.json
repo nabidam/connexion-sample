@@ -1,0 +1,378 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "DynamicCommands API",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/commands/moduleId": {
+      "get": {
+        "tags": [
+          "Command"
+        ],
+        "operationId": "run.GetCommandWithModuleID",
+        "parameters": [
+          {
+            "name": "moduleId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Command"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/modules/subSystemId": {
+      "get": {
+        "tags": [
+          "Module"
+        ],
+        "operationId": "run.GetModuleWithSubSystemID",
+        "parameters": [
+          {
+            "name": "subSystemId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Module"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/parameters/commandId": {
+      "get": {
+        "tags": [
+          "Parameter"
+        ],
+        "operationId": "run.GetParameterWithCommandID",
+        "parameters": [
+          {
+            "name": "commandId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Parameter"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/parametertypes": {
+      "get": {
+        "tags": [
+          "ParameterType"
+        ],
+        "operationId": "run.GetAllParameterTypes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/satellites": {
+      "get": {
+        "tags": [
+          "Satellite"
+        ],
+        "operationId": "run.GetAllSatellites",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Satellite"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/subsystems/satelliteId": {
+      "get": {
+        "tags": [
+          "Subsystem"
+        ],
+        "operationId": "run.GetSubsystemWithSatelliteID",
+        "parameters": [
+          {
+            "name": "satelliteId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Subsystem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Command": {
+        "type": "object",
+        "properties": {
+          "idCommand": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "commandName": {
+            "type": "string",
+            "nullable": true
+          },
+          "obcid": {
+            "type": "string",
+            "nullable": true
+          },
+          "lenght": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "moduleId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Module": {
+        "type": "object",
+        "properties": {
+          "idModule": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "moduleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "obcid": {
+            "type": "string",
+            "nullable": true
+          },
+          "subsystemId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Parameter": {
+        "type": "object",
+        "properties": {
+          "idParameters": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parameterNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "labelName": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "formula": {
+            "type": "string",
+            "nullable": true
+          },
+          "minValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "maxValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "commandId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "parameterTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "valueTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Values"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Satellite": {
+        "type": "object",
+        "properties": {
+          "idSatellite": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "satelliteName": {
+            "type": "string",
+            "nullable": true
+          },
+          "obcid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Subsystem": {
+        "type": "object",
+        "properties": {
+          "idSubsystem": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "subsystemName": {
+            "type": "string",
+            "nullable": true
+          },
+          "obcid": {
+            "type": "string",
+            "nullable": true
+          },
+          "satelliteId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ValueType": {
+        "type": "object",
+        "properties": {
+          "idValueType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Values": {
+        "type": "object",
+        "properties": {
+          "idValue": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "parameterVisible": {
+            "type": "string",
+            "nullable": true
+          },
+          "parametersId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
