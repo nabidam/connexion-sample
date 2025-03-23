@@ -172,6 +172,27 @@
           }
         }
       },
+      "get": {
+        "tags": [
+          "Setting"
+        ],
+        "operationId": "run.GetAllSettings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Station"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "Setting"

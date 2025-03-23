@@ -177,6 +177,9 @@ def PrefligtSettings():
 def GetSettingWithKey():
     return jsonify(generate_settings())
 
+def GetAllSettings():
+    return jsonify(generate_settings())
+
 def InsertSetting():
     return jsonify({
         "description": "OK"
