@@ -13,6 +13,9 @@ PARAMETER_TYPES = ["TextBox", "CheckBox",
 def random_string(length=8):
     return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
+def generate_random_ip():
+    return ".".join(str(random.randint(0, 255)) for _ in range(4))
+
 
 def generate_command():
     return {
@@ -83,6 +86,12 @@ def generate_parameter_type():
         "type": t
     } for idx, t in enumerate(PARAMETER_TYPES)]
 
+def generate_stations():
+    return [{
+        "idStation": idx+1,
+        "stationName": random_string(),
+        "iPAddress": generate_random_ip()
+    } for idx in range(10)]
 
 app = FlaskApp(__name__, specification_dir='./')
 
@@ -124,3 +133,21 @@ def GetAllSatellites():
 
 def GetSubsystemWithSatelliteID():
     return jsonify([generate_subsystem() for _ in range(random.randint(1, 10))])
+
+def GetAllStations():
+    return jsonify(generate_stations())
+
+def InsertStation():
+    return jsonify({
+        "description": "OK"
+    })
+
+def UpdateStation():
+    return jsonify({
+        "description": "OK"
+    })
+
+def DeleteStation():
+    return jsonify({
+        "description": "OK"
+    })
