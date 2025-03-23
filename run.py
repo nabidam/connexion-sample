@@ -93,6 +93,12 @@ def generate_stations():
         "iPAddress": generate_random_ip()
     } for idx in range(10)]
 
+def generate_settings():
+    return [{
+        "KeyData": random_string(),
+        "ValueData": random_string(),
+    } for _ in range(10)]
+
 app = FlaskApp(__name__, specification_dir='./')
 
 CORS(app.app, supports_credentials=True, origins=["*"])
@@ -158,6 +164,30 @@ def UpdateStation():
     })
 
 def DeleteStation():
+    return jsonify({
+        "description": "OK"
+    })
+    
+
+def PrefligtSettings():
+    return jsonify({
+        "description": "OK"
+    })    
+
+def GetSettingWithKey():
+    return jsonify(generate_settings())
+
+def InsertSetting():
+    return jsonify({
+        "description": "OK"
+    })
+
+def UpdateSetting():
+    return jsonify({
+        "description": "OK"
+    })
+
+def DeleteSetting():
     return jsonify({
         "description": "OK"
     })

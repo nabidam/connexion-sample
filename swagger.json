@@ -120,6 +120,129 @@
         }
       }
     },
+    "/api/settings/KeyData": {
+      "get": {
+        "tags": [
+          "Setting"
+        ],
+        "operationId": "run.GetSettingWithKey",
+        "parameters": [
+          {
+            "name": "KeyData",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Setting"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/settings": {
+      "options": {
+        "tags": [
+          "Setting"
+        ],
+        "operationId": "run.PrefligtSettings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Setting"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Setting"
+        ],
+        "operationId": "run.InsertSetting",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Setting"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Setting"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Setting"
+        ],
+        "operationId": "run.UpdateSetting",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Setting"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Setting"
+        ],
+        "operationId": "run.DeleteSetting",
+        "parameters": [
+          {
+            "name": "KeyData",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/commands/moduleId": {
       "get": {
         "tags": [
@@ -322,8 +445,7 @@
             "format": "int32",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "Module": {
         "type": "object",
@@ -345,8 +467,7 @@
             "format": "int32",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "Parameter": {
         "type": "object",
@@ -403,8 +524,7 @@
             },
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "Satellite": {
         "type": "object",
@@ -421,8 +541,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "Subsystem": {
         "type": "object",
@@ -444,8 +563,7 @@
             "format": "int32",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "ValueType": {
         "type": "object",
@@ -458,8 +576,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "Values": {
         "type": "object",
@@ -485,8 +602,7 @@
             "format": "int32",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "Station": {
         "type": "object",
@@ -503,8 +619,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "StationForCreate": {
         "type": "object",
@@ -514,6 +629,23 @@
             "nullable": true
           },
           "stationIp": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "Setting": {
+        "type": "object",
+        "properties": {
+          "idSetting": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "keyData": {
+            "type": "string",
+            "nullable": true
+          },
+          "valueData": {
             "type": "string",
             "nullable": true
           }
