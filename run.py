@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, Response
 from flask_cors import CORS
 
 from connexion import FlaskApp
@@ -95,11 +95,15 @@ def generate_stations():
 
 app = FlaskApp(__name__, specification_dir='./')
 
-CORS(app.app)
+CORS(app.app, supports_credentials=True, origins=["*"])
 
 # Read the swagger.yml file to configure the endpoints
 app.add_api('swagger.json')
 
+# @app.before_request
+# def basic_authentication():
+#     if request.method.lower() == 'options':
+#         return Response()
 
 @app.route('/')
 def home():
@@ -134,6 +138,12 @@ def GetAllSatellites():
 def GetSubsystemWithSatelliteID():
     return jsonify([generate_subsystem() for _ in range(random.randint(1, 10))])
 
+
+def PrefligtStations():
+    return jsonify({
+        "description": "OK"
+    })
+    
 def GetAllStations():
     return jsonify(generate_stations())
 

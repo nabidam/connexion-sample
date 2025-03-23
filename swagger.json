@@ -6,6 +6,27 @@
   },
   "paths": {
     "/api/stations": {
+      "options": {
+        "tags": [
+          "Station"
+        ],
+        "operationId": "run.PrefligtStations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Station"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "Station"
@@ -36,7 +57,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Station"
+                "$ref": "#/components/schemas/StationForCreate"
               }
             }
           },
@@ -484,6 +505,19 @@
           }
         },
         "additionalProperties": false
+      },
+      "StationForCreate": {
+        "type": "object",
+        "properties": {
+          "stationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "stationIp": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       }
     }
   }
