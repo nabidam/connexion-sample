@@ -107,12 +107,12 @@ def generate_favorites():
     return [{
         "idFavorites": idx+1,
         "commandName": random_string(),
-        "dateTimeFavorite": datetime.now(),
+        "dateTimeFavorite": datetime.utcnow().isoformat() + 'Z',
         "commandId": 1,
         "obcid": 1,
         "parameters": random_string(),
         "isOnline": True if random.randint(1, 20) == 1 else False,
-        "executaionDate": datetime.now(),
+        "executaionDate": datetime.utcnow().isoformat() + 'Z',
         "ownerUserId": 1,
         "userId": 1
     } for idx in range(10)]
@@ -234,6 +234,11 @@ def DeleteFavorite():
     })
 
 def InsertFavorite():
+    return jsonify({
+        "description": "OK"
+    })
+    
+def PrefligtFavoritesUserId():
     return jsonify({
         "description": "OK"
     })

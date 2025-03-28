@@ -104,6 +104,27 @@
       }
     },
     "/api/favorites/userId": {
+      "options": {
+        "tags": [
+          "Favorite"
+        ],
+        "operationId": "run.PrefligtFavoritesUserId",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Favorite"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "Favorite"
