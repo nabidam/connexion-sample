@@ -5,6 +5,7 @@ from connexion import FlaskApp
 
 import random
 import string
+from datetime import datetime
 
 PARAMETER_TYPES = ["TextBox", "CheckBox",
                    "ComboBox", "DateTime", "TextTLE", "RadioButton"]
@@ -86,6 +87,7 @@ def generate_parameter_type():
         "type": t
     } for idx, t in enumerate(PARAMETER_TYPES)]
 
+
 def generate_stations():
     return [{
         "idStation": idx+1,
@@ -93,11 +95,27 @@ def generate_stations():
         "iPAddress": generate_random_ip()
     } for idx in range(10)]
 
+
 def generate_settings():
     return [{
         "KeyData": random_string(),
         "ValueData": random_string(),
     } for _ in range(10)]
+    
+
+def generate_favorites():
+    return [{
+        "idFavorites": idx+1,
+        "commandName": random_string(),
+        "dateTimeFavorite": datetime.now(),
+        "commandId": 1,
+        "obcid": 1,
+        "parameters": random_string(),
+        "isOnline": True if random.randint(1, 20) == 1 else False,
+        "executaionDate": datetime.now(),
+        "ownerUserId": 1,
+        "userId": 1
+    } for idx in range(10)]
 
 app = FlaskApp(__name__, specification_dir='./')
 
@@ -191,6 +209,31 @@ def UpdateSetting():
     })
 
 def DeleteSetting():
+    return jsonify({
+        "description": "OK"
+    })
+    
+    
+    
+def PrefligtFavorites():
+    return jsonify({
+        "description": "OK"
+    })    
+
+def GetAllFavoritesWithUserID():
+    return jsonify(generate_favorites()) 
+
+def UpdateFavorite():
+    return jsonify({
+        "description": "OK"
+    })
+
+def DeleteFavorite():
+    return jsonify({
+        "description": "OK"
+    })
+
+def InsertFavorite():
     return jsonify({
         "description": "OK"
     })

@@ -5,6 +5,127 @@
     "version": "v1"
   },
   "paths": {
+    "/api/favorites": {
+      "options": {
+        "tags": [
+          "Favorite"
+        ],
+        "operationId": "run.PrefligtFavorites",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Favorite"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Favorite"
+        ],
+        "operationId": "run.GetAllFavoritesWithUserID",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Favorite"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Favorite"
+        ],
+        "operationId": "run.UpdateFavorite",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Favorite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Favorite"
+        ],
+        "operationId": "run.DeleteFavorite",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/favorites/userId": {
+      "post": {
+        "tags": [
+          "Favorite"
+        ],
+        "operationId": "run.InsertFavorite",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Favorite"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/stations": {
       "options": {
         "tags": [
@@ -439,6 +560,51 @@
   },
   "components": {
     "schemas": {
+      "Favorite": {
+        "type": "object",
+        "properties": {
+          "idFavorites": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "commandName": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateTimeFavorite": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "commandId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "obcid": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parameters": {
+            "type": "string",
+            "nullable": true
+          },
+          "isOnline": {
+            "type": "boolean"
+          },
+          "executaionDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ownerUserId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "Command": {
         "type": "object",
         "properties": {
