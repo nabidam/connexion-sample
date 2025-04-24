@@ -61,7 +61,7 @@ def generate_value():
         "text": random_string(10),
         "value": random_string(5),
         "parameterVisible": random.choice([True, False]),
-        "parametersId": random.randint(1, 500)
+        "argumentID": random.randint(1, 500)
     }
 
 
@@ -77,6 +77,10 @@ def generate_parameter():
         "commandId": random.randint(1, 1000),
         "parameterTypeId": random.randint(1, 7),
         "valueTypeId": random.randint(1, 20),
+        "argumentId": random.randint(1, 500),
+        "labelArgument": random_string(10),
+        "argumentTypeId": random.randint(1, 7),
+        "description": random_string(10),
         "values": [generate_value() for _ in range(random.randint(1, 5))]
     }
 
@@ -84,6 +88,13 @@ def generate_parameter():
 def generate_parameter_type():
     return [{
         "idParameterType": idx+1,
+        "type": t
+    } for idx, t in enumerate(PARAMETER_TYPES)]
+    
+
+def generate_argument_type():
+    return [{
+        "idArgumentType": idx+1,
         "type": t
     } for idx, t in enumerate(PARAMETER_TYPES)]
 
@@ -242,3 +253,41 @@ def PrefligtFavoritesUserId():
     return jsonify({
         "description": "OK"
     })
+    
+def GetArgumentWithID():
+    return jsonify({
+        "description": "OK"
+    })
+
+def PrefligtArgument():
+    return jsonify({
+        "description": "OK"
+    })
+
+def GetAllArguments():
+    return jsonify({
+        "description": "OK"
+    })
+
+def InsertArgument():
+    return jsonify({
+        "description": "OK"
+    })
+
+def UpdateArgument():
+    return jsonify({
+        "description": "OK"
+    })
+
+def DeleteArgument():
+    return jsonify({
+        "description": "OK"
+    })
+
+def PrefligtArgumentTypes():
+    return jsonify({
+        "description": "OK"
+    })
+
+def GetAllArgumentTypes():
+    return jsonify(generate_argument_type())

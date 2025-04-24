@@ -5,6 +5,173 @@
     "version": "v1"
   },
   "paths": {
+    "/api/arguments/{id}": {
+      "get": {
+        "tags": [
+          "Argument"
+        ],
+        "operationId": "run.GetArgumentWithID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Argument"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/arguments": {
+      "options": {
+        "tags": [
+          "Argument"
+        ],
+        "operationId": "run.PrefligtArgument",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Argument"
+        ],
+        "operationId": "run.GetAllArguments",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Argument"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Argument"
+        ],
+        "operationId": "run.InsertArgument",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Argument"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Argument"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Argument"
+        ],
+        "operationId": "run.UpdateArgument",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Argument"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Argument"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Argument"
+        ],
+        "operationId": "run.DeleteArgument",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/argumentTypes": {
+      "options": {
+        "tags": [
+          "ArgumentType"
+        ],
+        "operationId": "run.PrefligtArgumentTypes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ArgumentType"
+        ],
+        "operationId": "run.GetAllArgumentTypes",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/favorites": {
       "options": {
         "tags": [
@@ -581,6 +748,38 @@
   },
   "components": {
     "schemas": {
+      "Argument": {
+        "type": "object",
+        "properties": {
+          "idArgument": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "labelArgument": {
+            "type": "string",
+            "nullable": true
+          },
+          "argumentTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "valueTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "tbValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Values"
+            },
+            "nullable": true
+          }
+        }
+      },
       "Favorite": {
         "type": "object",
         "properties": {
@@ -638,20 +837,20 @@
             "nullable": true
           },
           "obcid": {
-            "type": "string",
-            "nullable": true
+            "type": "integer",
+            "format": "int32"
           },
           "lenght": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "isEnabled": {
             "type": "boolean"
           },
           "moduleId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           }
         }
       },
@@ -684,14 +883,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "parameterNumber": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "labelName": {
-            "type": "string",
-            "nullable": true
-          },
           "defaultValue": {
             "type": "string",
             "nullable": true
@@ -712,17 +903,26 @@
           },
           "commandId": {
             "type": "integer",
-            "format": "int32",
+            "format": "int32"
+          },
+          "argumentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "labelArgument": {
+            "type": "string",
             "nullable": true
           },
-          "parameterTypeId": {
+          "argumentTypeId": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
           "valueTypeId": {
             "type": "integer",
-            "format": "int32",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string",
             "nullable": true
           },
           "values": {
